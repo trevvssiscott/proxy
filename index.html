@@ -2,17 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IP Address</title>
-    <script>
-        async function fetchIP() {
-            const response = await fetch('https://api.ipify.org?format=json');
-            const data = await response.json();
-            document.body.textContent = data.ip;
-        }
-        window.onload = fetchIP;
-    </script>
+    <title>Country Finder</title>
 </head>
 <body>
+    <div id="country"></div>
+
+    <script>
+        async function fetchCountry() {
+            try {
+                const response = await fetch('https://ipwhois.app/json/');
+                const data = await response.json();
+                
+                document.getElementById('country').textContent = data.country;
+            } catch (error) {
+                document.getElementById('country').textContent = 'Error';
+            }
+        }
+
+        fetchCountry();
+    </script>
 </body>
 </html>
